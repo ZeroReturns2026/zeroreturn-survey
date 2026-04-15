@@ -584,6 +584,38 @@
             margin-bottom: 24px;
         }
 
+        .garment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .garment-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1f2937;
+            margin: 0;
+        }
+
+        .remove-garment-btn {
+            background: transparent;
+            border: 1px solid #e5e7eb;
+            color: #6b7280;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .remove-garment-btn:hover {
+            background: #fee2e2;
+            border-color: #fca5a5;
+            color: #b91c1c;
+        }
+
         .add-garment-btn:hover {
             border-color: #2d6a4f;
             background: rgba(45, 106, 79, 0.03);
@@ -1375,6 +1407,7 @@
 
         let currentStep = 1;
         let formData = {garments: []};
+        let visibleGarments = 3;
 
         function startSurvey() {
             document.getElementById('introScreen').classList.add('hidden');
@@ -1393,13 +1426,14 @@
         function renderGarments() {
             const container = document.getElementById('garmentContainer');
             container.innerHTML = '';
-            for (let i = 1; i <= 5; i++) {
+            for (let i = 1; i <= visibleGarments; i++) {
                 const isRequired = i <= 3;
                 const garment = formData.garments[i - 1] || {brand: '', product: '', size: '', fit: ''};
-                const isVisible = isRequired || garment.brand || garment.product;
-                if (!isVisible && i > 3) continue;
-                container.innerHTML += `<div class="garment-card ${isRequired ? 'required' : ''}" id="garment${i}"><div class="form-group"><label>Brand ${isRequired ? '*' : ''}</label><div class="brand-autocomplete"><input type="text" class="autocomplete-input brand-input" data-garment="${i}" placeholder="Search brands..." value="${garment.brandDisplay || ''}" autocomplete="off"><div class="autocomplete-dropdown" data-garment="${i}"></div>${garment.brand ? `<div class="selected-tag">${garment.brand}<button type="button" class="clear-btn" onclick="clearBrand(${i})">×</button></div>` : ''}${garment.customBrand ? `<div class="custom-brand-input show"><input type="text" id="customBrand${i}" placeholder="Enter brand name" value="${garment.customBrand}"></div>` : `<div class="custom-brand-input" id="customBrand${i}Container"></div>`}</div><div class="validation-error" data-field="garment${i}_brand"></div></div><div class="form-group"><label>Product / Fit Name ${isRequired ? '*' : ''}</label><input type="text" class="garment-product" data-garment="${i}" placeholder="e.g. Crown Sport Polo, Dri-FIT Victory" value="${garment.product || ''}"><div class="validation-error" data-field="garment${i}_product"></div></div><div class="form-group"><label>Size ${isRequired ? '*' : ''}</label><div class="chip-group">${SIZES.map(size => `<div class="chip"><input type="radio" id="size${i}_${size}" name="garment${i}_size" value="${size}" ${garment.size === size ? 'checked' : ''}><label class="chip-label" for="size${i}_${size}">${size}</label></div>`).join('')}</div><div class="validation-error" data-field="garment${i}_size"></div></div><div class="form-group"><label>How Does It Fit? ${isRequired ? '*' : ''}</label><div class="chip-group">${FIT_OPTIONS.map((opt, idx) => `<div class="chip"><input type="radio" id="fit${i}_${idx}" name="garment${i}_fit" value="${opt.value}" ${garment.fit === opt.value ? 'checked' : ''}><label class="chip-label" for="fit${i}_${idx}">${opt.emoji} ${opt.label}</label></div>`).join('')}</div><div class="validation-error" data-field="garment${i}_fit"></div></div></div>`;
+                const removeBtn = !isRequired && i === visibleGarments ? `<button type="button" class="remove-garment-btn" onclick="removeGarment(${i})">× Remove</button>` : '';
+                container.innerHTML += `<div class="garment-card ${isRequired ? 'required' : ''}" id="garment${i}"><div class="garment-header"><h3 class="garment-title">Garment ${i}${isRequired ? '' : ' (optional)'}</h3>${removeBtn}</div><div class="form-group"><label>Brand ${isRequired ? '*' : ''}</label><div class="brand-autocomplete"><input type="text" class="autocomplete-input brand-input" data-garment="${i}" placeholder="Search brands..." value="${garment.brandDisplay || ''}" autocomplete="off"><div class="autocomplete-dropdown" data-garment="${i}"></div>${garment.brand ? `<div class="selected-tag">${garment.brand}<button type="button" class="clear-btn" onclick="clearBrand(${i})">×</button></div>` : ''}${garment.customBrand ? `<div class="custom-brand-input show"><input type="text" id="customBrand${i}" placeholder="Enter brand name" value="${garment.customBrand}"></div>` : `<div class="custom-brand-input" id="customBrand${i}Container"></div>`}</div><div class="validation-error" data-field="garment${i}_brand"></div></div><div class="form-group"><label>Product / Fit Name ${isRequired ? '*' : ''}</label><input type="text" class="garment-product" data-garment="${i}" placeholder="e.g. Crown Sport Polo, Dri-FIT Victory" value="${garment.product || ''}"><div class="validation-error" data-field="garment${i}_product"></div></div><div class="form-group"><label>Size ${isRequired ? '*' : ''}</label><div class="chip-group">${SIZES.map(size => `<div class="chip"><input type="radio" id="size${i}_${size}" name="garment${i}_size" value="${size}" ${garment.size === size ? 'checked' : ''}><label class="chip-label" for="size${i}_${size}">${size}</label></div>`).join('')}</div><div class="validation-error" data-field="garment${i}_size"></div></div><div class="form-group"><label>How Does It Fit? ${isRequired ? '*' : ''}</label><div class="chip-group">${FIT_OPTIONS.map((opt, idx) => `<div class="chip"><input type="radio" id="fit${i}_${idx}" name="garment${i}_fit" value="${opt.value}" ${garment.fit === opt.value ? 'checked' : ''}><label class="chip-label" for="fit${i}_${idx}">${opt.emoji} ${opt.label}</label></div>`).join('')}</div><div class="validation-error" data-field="garment${i}_fit"></div></div></div>`;
             }
+            const addBtn = document.getElementById('addGarmentBtn');
+            if (addBtn) addBtn.style.display = visibleGarments >= 5 ? 'none' : '';
             document.querySelectorAll('.brand-input').forEach(input => {
                 input.addEventListener('focus', showBrandDropdown);
                 input.addEventListener('input', filterBrands);
@@ -1490,7 +1524,18 @@
         }
 
         function addGarment() {
-            formData.garments.push({brand: '', product: '', size: '', fit: ''});
+            if (visibleGarments >= 5) return;
+            visibleGarments++;
+            if (!formData.garments[visibleGarments - 1]) {
+                formData.garments[visibleGarments - 1] = {brand: '', product: '', size: '', fit: ''};
+            }
+            renderGarments();
+        }
+
+        function removeGarment(i) {
+            if (i <= 3 || i !== visibleGarments) return;
+            formData.garments[i - 1] = {brand: '', product: '', size: '', fit: ''};
+            visibleGarments--;
             renderGarments();
         }
 
@@ -1581,8 +1626,11 @@
 
         function validateStep2() {
             let valid = true;
-            for (let i = 1; i <= 3; i++) {
+            for (let i = 1; i <= visibleGarments; i++) {
                 const garment = formData.garments[i - 1] || {};
+                const isRequired = i <= 3;
+                const hasAny = garment.brand || garment.product || garment.size || garment.fit;
+                if (!isRequired && !hasAny) continue;
                 if (!garment.brand) {showError(`garment${i}_brand`, 'Brand is required'); valid = false;}
                 if (!garment.product) {showError(`garment${i}_product`, 'Product name is required'); valid = false;}
                 if (!garment.size) {showError(`garment${i}_size`, 'Size is required'); valid = false;}
