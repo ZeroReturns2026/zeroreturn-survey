@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sizing Survey - Help Build a Better Way to Shop</title>
+    <meta name="description" content="Help build a platform that takes the guesswork out of sizing across brands. 3-minute survey.">
+    <meta property="og:title" content="Help Build a Better Way to Shop for Clothes">
+    <meta property="og:description" content="Take this 3-minute survey and help build a platform that ends sizing guesswork across brands.">
+    <meta property="og:type" content="website">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #2d6a4f 0%, #40916c 50%, #52b788 100%);
+            min-height: 100vh;
+            color: #1a1a1a;
+            -webkit-font-smoothing: antialiased;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            width: 100%;
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #2d6a4f 0%, #40916c 100%);
+            color: white;
+            padding: 50px 40px 40px;
+            text-align: center;
+        }
+
+        .icon {
+            font-size: 56px;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        h1 {
+            font-size: 30px;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 14px;
+            letter-spacing: -0.5px;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            opacity: 0.95;
+            line-height: 1.5;
+            font-weight: 500;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .mission {
+            font-size: 17px;
+            line-height: 1.65;
+            color: #2d3748;
+            margin-bottom: 28px;
+        }
+
+        .mission strong {
+            color: #2d6a4f;
+            font-weight: 700;
+        }
+
+        .benefits {
+            display: grid;
+            gap: 14px;
+            margin-bottom: 32px;
+        }
+
+        .benefit {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            padding: 14px 16px;
+            background: #f0fdf4;
+            border-left: 3px solid #40916c;
+            border-radius: 8px;
+        }
+
+        .benefit-icon {
+            font-size: 22px;
+            flex-shrink: 0;
+            line-height: 1;
+        }
+
+        .benefit-text {
+            font-size: 14px;
+            line-height: 1.5;
+            color: #2d3748;
+        }
+
+        .benefit-text strong {
+            color: #1a1a1a;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .cta-button {
+            display: block;
+            width: 100%;
+            padding: 18px 32px;
+            background: linear-gradient(135deg, #2d6a4f 0%, #40916c 100%);
+            color: white;
+            text-decoration: none;
+            text-align: center;
+            font-size: 17px;
+            font-weight: 700;
+            border-radius: 14px;
+            box-shadow: 0 8px 24px rgba(45, 106, 79, 0.35);
+            transition: all 0.2s ease;
+            letter-spacing: 0.3px;
+            margin-bottom: 16px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(45, 106, 79, 0.45);
+        }
+
+        .cta-button:active {
+            transform: translateY(0);
+        }
+
+        .cta-meta {
+            text-align: center;
+            font-size: 13px;
+            color: #6b7280;
+            font-weight: 500;
+        }
+
+        .footer {
+            padding: 24px 40px;
+            background: #f9fafb;
+            text-align: center;
+            font-size: 12px;
+            color: #6b7280;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 12px;
+            }
+
+            .container {
+                border-radius: 20px;
+            }
+
+            .hero {
+                padding: 40px 24px 32px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            .subtitle {
+                font-size: 14px;
+            }
+
+            .icon {
+                font-size: 48px;
+            }
+
+            .content {
+                padding: 28px 24px;
+            }
+
+            .mission {
+                font-size: 15px;
+            }
+
+            .cta-button {
+                padding: 16px 24px;
+                font-size: 16px;
+            }
+
+            .footer {
+                padding: 20px 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="hero">
+            <span class="icon">⛳</span>
+            <h1>Help End Sizing Guesswork</h1>
+            <div class="subtitle">A 3-minute survey to build a smarter way to shop</div>
+        </div>
+
+        <div class="content">
+            <p class="mission">
+                We're building a platform that takes the <strong>guesswork out of sizes and fits</strong> across different brands. Our goal is to make shopping easier and minimize returns — and your input is what makes it possible.
+            </p>
+
+            <div class="benefits">
+                <div class="benefit">
+                    <span class="benefit-icon">👕</span>
+                    <div class="benefit-text">
+                        <strong>Tell us what you wear</strong>
+                        Share a few brands and how they fit you
+                    </div>
+                </div>
+                <div class="benefit">
+                    <span class="benefit-icon">📊</span>
+                    <div class="benefit-text">
+                        <strong>Help map sizing across brands</strong>
+                        Your data trains a model that matches sizes between 100+ labels
+                    </div>
+                </div>
+                <div class="benefit">
+                    <span class="benefit-icon">🛍️</span>
+                    <div class="benefit-text">
+                        <strong>Shop with confidence</strong>
+                        Be the first to know your size in any brand — never guess again
+                    </div>
+                </div>
+            </div>
+
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSepM_4uVNXOAjAegPr9jbpPEVeMZx36C5HCtr72s7z5c0XKFg/viewform" class="cta-button" target="_blank" rel="noopener">
+                Take the Survey →
+            </a>
+
+            <div class="cta-meta">⏱️ Takes about 3 minutes • Completely anonymous</div>
+        </div>
+
+        <div class="footer">
+            Thanks for helping build a better shopping experience.
+        </div>
+    </div>
+</body>
+</html>
