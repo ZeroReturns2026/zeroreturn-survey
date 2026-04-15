@@ -894,12 +894,129 @@
                 padding: 8px 12px;
                 font-size: 12px;
             }
+        .intro-screen {
+            padding: 40px;
+            text-align: center;
+        }
+
+        .intro-icon {
+            font-size: 56px;
+            display: block;
+            margin-bottom: 16px;
+        }
+
+        .intro-title {
+            font-size: 26px;
+            font-weight: 800;
+            color: #2d6a4f;
+            margin-bottom: 14px;
+            line-height: 1.2;
+        }
+
+        .intro-mission {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #2d3748;
+            margin-bottom: 28px;
+        }
+
+        .intro-mission strong {
+            color: #2d6a4f;
+            font-weight: 700;
+        }
+
+        .intro-benefits {
+            display: grid;
+            gap: 12px;
+            margin-bottom: 32px;
+            text-align: left;
+        }
+
+        .intro-benefit {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            padding: 14px 16px;
+            background: #f0fdf4;
+            border-left: 3px solid #40916c;
+            border-radius: 8px;
+        }
+
+        .intro-benefit-icon {
+            font-size: 22px;
+            flex-shrink: 0;
+            line-height: 1;
+        }
+
+        .intro-benefit-text {
+            font-size: 14px;
+            line-height: 1.5;
+            color: #2d3748;
+        }
+
+        .intro-benefit-text strong {
+            color: #1a1a1a;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .intro-cta {
+            display: block;
+            width: 100%;
+            padding: 18px 32px;
+            background: linear-gradient(135deg, #2d6a4f 0%, #40916c 100%);
+            color: white;
+            border: none;
+            text-align: center;
+            font-size: 17px;
+            font-weight: 700;
+            border-radius: 14px;
+            box-shadow: 0 8px 24px rgba(45, 106, 79, 0.35);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            letter-spacing: 0.3px;
+            margin-bottom: 12px;
+            font-family: inherit;
+        }
+
+        .intro-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(45, 106, 79, 0.45);
+        }
+
+        .intro-meta {
+            font-size: 13px;
+            color: #6b7280;
+            font-weight: 500;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        @media (max-width: 600px) {
+            .intro-screen {
+                padding: 28px 24px;
+            }
+
+            .intro-title {
+                font-size: 22px;
+            }
+
+            .intro-mission {
+                font-size: 15px;
+            }
+
+            .intro-icon {
+                font-size: 48px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="header">
+        <div class="header hidden" id="surveyHeader">
             <div class="tagline">Help End Sizing Guesswork Across 100+ Brands</div>
             <div class="mission">
                 You're helping build a platform that takes the guesswork out of sizes and fits across different brands. Our goal is to make shopping easier and minimize returns — and your input is what makes it possible. <strong>Thanks for taking 3 minutes to help.</strong>
@@ -910,7 +1027,44 @@
             <div class="progress-text" id="progressText">Step 1 of 5</div>
         </div>
 
-        <div class="form-content">
+        <div class="intro-screen" id="introScreen">
+            <span class="intro-icon">⛳</span>
+            <h1 class="intro-title">Help End Sizing Guesswork</h1>
+            <p class="intro-mission">
+                We're building a platform that takes the <strong>guesswork out of sizes and fits</strong> across different brands. Our goal is to make shopping easier and minimize returns — and your input is what makes it possible.
+            </p>
+
+            <div class="intro-benefits">
+                <div class="intro-benefit">
+                    <span class="intro-benefit-icon">👕</span>
+                    <div class="intro-benefit-text">
+                        <strong>Tell us what you wear</strong>
+                        Share a few brands and how they fit you
+                    </div>
+                </div>
+                <div class="intro-benefit">
+                    <span class="intro-benefit-icon">📊</span>
+                    <div class="intro-benefit-text">
+                        <strong>Help map sizing across brands</strong>
+                        Your data helps match sizes between 100+ labels
+                    </div>
+                </div>
+                <div class="intro-benefit">
+                    <span class="intro-benefit-icon">🛍️</span>
+                    <div class="intro-benefit-text">
+                        <strong>Shop with confidence</strong>
+                        Be the first to know your size in any brand — never guess again
+                    </div>
+                </div>
+            </div>
+
+            <button type="button" class="intro-cta" onclick="startSurvey()">
+                Start Survey →
+            </button>
+            <div class="intro-meta">⏱️ Takes about 3 minutes</div>
+        </div>
+
+        <div class="form-content hidden" id="formContent">
             <form id="surveyForm" onsubmit="handleFormSubmit(event)">
                 <div class="form-section active" id="step1">
                     <h2 class="section-title">Let's start with you</h2>
@@ -1219,6 +1373,13 @@
 
         let currentStep = 1;
         let formData = {garments: []};
+
+        function startSurvey() {
+            document.getElementById('introScreen').classList.add('hidden');
+            document.getElementById('surveyHeader').classList.remove('hidden');
+            document.getElementById('formContent').classList.remove('hidden');
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
 
         document.addEventListener('DOMContentLoaded', function() {
             renderGarments();
